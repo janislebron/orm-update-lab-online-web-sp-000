@@ -3,10 +3,11 @@ require_relative "../config/environment.rb"
 class Student
     attr_accessor :id, :name, :grade
 
-  # Remember, you can access your database connection anywhere in this class
-  #  with DB[:conn]
   def initialize(name, grade, id=nil)
-    end
+    @id = id
+    @name = name
+    @grade = grade
+  end
 
   def self.create_table
     sql = <<-SQL
@@ -36,7 +37,7 @@ class Student
 
     DB[:conn].execute(sql, self.name, self.grade)
     @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
-  end
+    end
   end
 
   def self.create
