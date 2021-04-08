@@ -39,6 +39,10 @@ class Student
   end
   end
 
+  def self.create
+  end
+
+
     def self.new_from_db(row)
       # create a new Student object given a row from the database
       student = self.new
@@ -62,7 +66,9 @@ class Student
       end.first
     end
 
-
-
+    def update
+      sql = "UPDATE students SET name = ?, grade = ?, name = ?"
+      DB[:conn].execute(sql, self.name, self.grade, self.name)
+    end
 
 end
